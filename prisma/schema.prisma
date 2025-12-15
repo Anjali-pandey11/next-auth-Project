@@ -1,9 +1,12 @@
+
 generator client {
   provider = "prisma-client-js"
+   engineType = "library"  // Prisma Client ko browser/edge runtime me run karne ke liye optimize karta hai.
 }
 
 datasource db {
   provider = "postgresql"
+  
 }
 
 
