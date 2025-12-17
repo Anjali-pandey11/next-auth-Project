@@ -27,4 +27,4 @@ export default { providers: [
       return null;
     }
   })
-] } satisfies NextAuthConfig
+] } satisfies NextAuthConfig ;

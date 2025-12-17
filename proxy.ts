@@ -11,7 +11,7 @@ import NextAuth from 'next-auth'
  const { auth } = NextAuth(authConfig)
 
 export default auth((req)=>{
-  const { nextUrl} = req;
+  const { nextUrl } = req;
   const isLoggedIn = !!req.auth;
 
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
@@ -41,4 +41,3 @@ export default auth((req)=>{
 export const config = {
   matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
 }
-
