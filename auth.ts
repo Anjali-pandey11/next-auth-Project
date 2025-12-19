@@ -29,6 +29,21 @@ export const {
  
   callbacks:{
 
+    async signIn({user,account}){
+        // Allow Oauth  without email verification
+        if(account?.provider !== "credentials")
+          return true;
+
+        const existingUser = await getUserById(user.id);
+
+        // Agar user ki email verify NAHI hai, to login reject kar do.
+        if(!existingUser?.emailVerified) return false;
+
+        // TODO: ADD 2FA check
+
+        return true;
+    },
+
      async session({token,session}){
 
       if(token.sub && session.user){

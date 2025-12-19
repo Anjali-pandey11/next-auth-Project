@@ -51,7 +51,7 @@ export const LoginForm = ()=>{
         setError(data?.error);
 
         // todo when we add 2FA
-        // setSuccess(data?.success);
+        setSuccess(data?.success);
       })
     })
   }
@@ -108,7 +108,7 @@ export const LoginForm = ()=>{
              />
             </div>
             <FormError message= {error || urlError}/>
-            <FormSuccess message={success}/>
+             <FormSuccess message={success}/>
             <Button 
             type="submit"
             className="w-full"
