@@ -15,7 +15,6 @@ export const login = async (values:z.infer<typeof LoginSchema>) => {
       return {error:"Invalid fields"}
    }
 
-   
    const {email, password} = validatedFields.data;
    const existingUser = await getUserByEmail(email);
 

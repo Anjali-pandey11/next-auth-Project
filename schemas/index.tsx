@@ -22,3 +22,10 @@ export const RegisterSchema = z.object({
     message:"minimum 6 characters required"
   })
 });
+
+
+export const ResetSchema = z.object({
+  email: z.string({}).email({
+    message:"email is required"
+  }),
+});
