@@ -1,6 +1,6 @@
 "use server";
 
-import { getPasswordResetTokenByEmail } from "@/data/password-reset-token";
+import {getPasswordResetTokenByToken } from "@/data/password-reset-token";
 import { getUserByEmail } from "@/data/user";
 import { NewPasswordSchema } from "@/schemas";
 import z from "zod";
@@ -23,7 +23,7 @@ export const newPassword = async (
 
   const {password} = validatedFields.data;
 
-  const existingToken = await getPasswordResetTokenByEmail(token);
+  const existingToken = await getPasswordResetTokenByToken(token);
 
   if(!existingToken){
     return {error: "Invalid token"}
@@ -39,7 +39,7 @@ export const newPassword = async (
 (existingToken.email);
 
 if(!existingUser){
-  return {error : "EMail does not exist"}
+  return {error : "Email does not exist"}
 }
 
 const hasPassword = await bcrypt.hash(password, 10);
