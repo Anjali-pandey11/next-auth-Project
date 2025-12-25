@@ -40,6 +40,7 @@ export const LoginForm = ()=>{
      defaultValues:{
       email:"",
       password:"",
+      code:"",
      }
   });
 
@@ -51,22 +52,20 @@ export const LoginForm = ()=>{
     startTransition(()=>{
       login(values)
       .then((data)=>{
-
         if(data?.error){
           form.reset();
-          setError(data?.error);
+          setError(data.error);
         }
-
         if(data?.success){
           form.reset();
-          setSuccess(data?.success);
+          setSuccess(data.success);
         }
-        
        // todo when we add 2FA
        if(data?.twoFactor){
         setShowTwoFactor(true)
        }
-      }).catch(() => setError("Something went wrong"));
+      })
+      .catch(() => setError("Something went wrong"));
     })
   }
   
