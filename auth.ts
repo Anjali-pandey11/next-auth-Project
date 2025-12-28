@@ -69,15 +69,24 @@ export const {
         session.user.isTwoFactorEnabled = token.isTwoFactorEnabled as boolean
       }
 
+      if(session.user){
+        session.user.name = token.name;
+      }
+
       return session;
      },
 
      async jwt({token}){
+      
+
       if(!token.sub) return token;
 
       const existingUser = await getUserById(token.sub);
 
       if(!existingUser) return token;
+
+      token.name = existingUser.name;
+      token.email = existingUser.email;
 
       token.role = existingUser.role;
       token.isTwoFactorEnabled = existingUser.isTwoFactorEnabled;
