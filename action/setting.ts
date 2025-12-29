@@ -3,7 +3,7 @@
 import * as z from "zod";
 import { db } from "@/lib/db";
 import { SettingSchema } from "@/schemas";
-import { getUserById } from "@/data/user";
+import { getUserByEmail, getUserById } from "@/data/user";
 import { currentUser } from "@/lib/auth";
 
 export const  settings = async (
@@ -19,6 +19,21 @@ export const  settings = async (
 
   if(!dbUser){
     return {error:"Unauthorized"}
+  }
+
+  if(user.isOAuth){
+    values.email = undefined;
+    values.password=undefined;
+    values.newPassword=undefined;
+    values.isTwoFactorEnabled=undefined;
+  }
+
+  if(values.email && values.email !== user.email){
+    const existingUser = await getUserByEmail(values.email);
+
+    if(existingUser && existingUser.id !== user.id){
+      return {error:"email already exist!"}
+    }
   }
 
   await db.user.update({
