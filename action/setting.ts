@@ -18,7 +18,13 @@ export const  settings = async (
     return {error:"Unauthorized"};
   }
 
+  if (!user.id) {
+    return {error:"undefined"};; // block sign-in
+  }
+
   const dbUser = await getUserById(user.id);
+
+     
 
   if(!dbUser){
     return {error:"Unauthorized"}
