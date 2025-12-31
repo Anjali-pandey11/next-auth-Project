@@ -65,7 +65,10 @@ export const LoginForm = ()=>{
         setShowTwoFactor(true)
        }
       })
-      .catch(() => setError("Something went wrong"));
+      .catch((err) => {
+        if (err?.message === "NEXT_REDIRECT") return;
+         setError("Something went wrong");
+       });
     })
   }
   

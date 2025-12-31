@@ -40,7 +40,7 @@ const SettingsPage =  () => {
   const {update} = useSession()
   const [isPending, startTransition] = useTransition();
 
-  console.log(user)
+
 
   const form = useForm<z.infer<typeof SettingSchema>>({
     resolver:zodResolver(SettingSchema),
